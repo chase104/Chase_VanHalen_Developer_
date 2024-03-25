@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const [text, setText] = useState("");
   let finalText = "I am Chase Van Halen";
   useEffect(() => {
+    if (text.length) return;
     for (let i = 0; i < finalText.length; i++) {
       setTimeout(() => {
         setText((prev) => prev + finalText[i]);
@@ -26,10 +30,14 @@ const Header = () => {
           <span>Software Educator</span>
         </p>
 
-        <a href="#about" className="btn btn-outline-light btn-lg mt-3">
+        <a href="#about" className="btn btn-outline-light btn-lg mt-3 chevron">
           <div className="d-flex">
             <div className="me-3">
-              <i className="fas fa-chevron-down"></i>
+              <FontAwesomeIcon
+                icon={faChevronDown}
+                className="chevron"
+                size="1x"
+              />{" "}
             </div>
             <div className="text-start">
               <span>More About Me</span>
@@ -37,24 +45,18 @@ const Header = () => {
           </div>
         </a>
 
-        <div className="social d-flex gap-3 position-absolute">
+        <div className="social d-flex gap-3  mt-4">
           <a href="#">
-            <i className="fab fa-twitter fa-3x text-white"></i>
+            <FontAwesomeIcon icon={faGithub} size="3x" color="white" />
           </a>
           <a href="#">
-            <i className="fab fa-instagram fa-3x text-white"></i>
+            <FontAwesomeIcon icon={faLinkedin} size="3x" color="white" />
           </a>
           <a href="#">
-            <i className="fab fa-linkedin fa-3x text-white"></i>
+            <FontAwesomeIcon icon={faGithub} size="3x" color="white" />
           </a>
           <a href="#">
-            <i className="fab fa-facebook fa-3x text-white"></i>
-          </a>
-          <a href="#">
-            <i className="fab fa-youtube fa-3x text-white"></i>
-          </a>
-          <a href="#">
-            <i className="fab fa-github fa-3x text-white"></i>
+            <FontAwesomeIcon icon={faLinkedin} size="3x" color="white" />
           </a>
         </div>
       </div>

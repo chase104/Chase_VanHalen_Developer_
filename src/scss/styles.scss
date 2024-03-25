@@ -7,10 +7,21 @@
     url("../images/header-background.jpg") center center no-repeat;
   background-size: cover;
 }
-
+.navbar-brand img {
+  max-height: 30px;
+}
 * {
   box-sizing: border-box !important;
 }
 .navbar a {
   color: #fff !important;
+}
+.about-img {
+  width: 200px;
+  height: 200px;
+}
+.chevron:hover {
+  &svg {
+    color: black;
+  }
 }

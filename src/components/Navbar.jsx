@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import Logo from "../images/logo.png";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faAws, faNodeJs, faReact } from "@fortawesome/free-brands-svg-icons";
+// import { faDatabase } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const [navbarClasses, setNavbarClasses] = useState("");
@@ -25,8 +28,16 @@ const Navbar = () => {
       className={`navbar navbar-expand-lg fixed-top  navbar-light ${navbarClasses}`}
     >
       <div className="container">
-        <a className="navbar-brand" href="#">
-          <img src={Logo} alt="" width="124" />
+        <a className="navbar-brand d-flex gap-3" href="#">
+          <img src={Logo} alt="logo" />
+          {/* <span className="fw-bold fs-4">CV</span> */}
+          {/* <FontAwesomeIcon icon={faReact} size="2x" color="primary" />
+
+          <FontAwesomeIcon icon={faNodeJs} size="2x" color="primary" />
+
+          <FontAwesomeIcon icon={faAws} size="2x" color="primary" />
+
+          <FontAwesomeIcon icon={faDatabase} size="2x" color="primary" /> */}
         </a>
         <button
           className="navbar-toggler"
