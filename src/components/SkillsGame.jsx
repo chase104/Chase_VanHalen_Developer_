@@ -1,167 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const SkillsGame = ({ handleConfettiExplosion }) => {
-  const [skills, setSkills] = useState({
-    html5: {
-      id: "html5",
-      name: "HTML5",
-      category: "frontend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faHtml5",
-    },
-    css3: {
-      id: "css3",
-      name: "CSS3",
-      category: "frontend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faCss3",
-    },
-    sass: {
-      id: "sass",
-      name: "SASS",
-      category: "frontend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faCss3",
-    },
-    javascript: {
-      id: "javascript",
-      name: "JavaScript",
-      category: "frontend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-    typescript: {
-      id: "typescript",
-      name: "TypeScript",
-      category: "frontend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-    react: {
-      id: "react",
-      name: "React",
-      category: "frontend",
-      currentLocation: "skills",
-      animation: "spin",
-      icon: "faReact",
-    },
-    redux: {
-      id: "redux",
-      name: "Redux",
-      category: "frontend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faReact",
-    },
-    bootstrap: {
-      id: "bootstrap",
-      name: "Bootstrap",
-      category: "frontend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faBootstrap",
-    },
-    nodejs: {
-      id: "nodejs",
-      name: "Node.js",
-      category: "backend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-    express: {
-      id: "express",
-      name: "Express",
-      category: "backend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-    mongodb: {
-      id: "mongodb",
-      name: "MongoDB",
-      category: "backend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-    sql: {
-      id: "sql",
-      name: "SQL",
-      category: "backend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-    restfulapis: {
-      id: "restfulapis",
-      name: "RESTful APIs",
-      category: "backend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-    graphql: {
-      id: "graphql",
-      name: "GraphQL",
-      category: "backend",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-    git: {
-      id: "git",
-      name: "Git",
-      category: "other",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-    github: {
-      id: "github",
-      name: "GitHub",
-      category: "other",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-    heroku: {
-      id: "heroku",
-      name: "Heroku",
-      category: "other",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-    aws: {
-      id: "aws",
-      name: "AWS",
-      category: "other",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-    netlify: {
-      id: "netlify",
-      name: "Netlify",
-      category: "other",
-      currentLocation: "skills",
-      animation: "pulse",
-      icon: "faJs",
-    },
-  });
+const SkillsGame = (props) => {
+  let handleConfettiExplosion = props.handleConfettiExplosion;
+  let propsSkills = props.skills;
+  console.log(propsSkills);
+  function transformSkills(skills) {
+    const result = {};
+
+    // Iterate through each category
+    Object.keys(skills).forEach((category) => {
+      skills[category].forEach((skill) => {
+        const id = skill.name.toLowerCase().replace(/\s+/g, "");
+        result[id] = {
+          id: id,
+          name: skill.name,
+          category: category,
+          currentLocation: "skills",
+          animation: skill.animation,
+          icon: skill.logo, // Directly use the logo provided
+        };
+      });
+    });
+
+    return result;
+  }
+
+  const [skills, setSkills] = useState(transformSkills(propsSkills));
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [skillsKeys, setSkillsKeys] = useState(
     Object.keys(skills).sort(() => Math.random() - 0.5)
   );
 
-  console.log(skills);
+  console.log({ skills });
   const onDragEnd = (result) => {
     console.log(result);
     console.log(skills[result.draggableId]);
@@ -223,7 +94,7 @@ const SkillsGame = ({ handleConfettiExplosion }) => {
                 className="col-md-12 my-4"
               >
                 <h4>Chase's Skills</h4>
-                <div className="buttons-container d-flex flex-wrap gap-1">
+                <div className="buttons-container d-flex justify-content-center flex-wrap gap-1">
                   {unplacedSkills.map((key, index) => (
                     <Draggable key={key} draggableId={key} index={index}>
                       {(provided, snapshot) => (
@@ -231,7 +102,7 @@ const SkillsGame = ({ handleConfettiExplosion }) => {
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className="w-md-25 w-50"
+                          className="w-md-25 w-100 w-sm-50"
                           style={{
                             userSelect: "none",
                             padding: 16,
@@ -246,6 +117,11 @@ const SkillsGame = ({ handleConfettiExplosion }) => {
                             ...provided.draggableProps.style,
                           }}
                         >
+                          <img
+                            className="game-img img-fluid"
+                            src={skills[key].icon}
+                            alt="img"
+                          />
                           {skills[key].name}
                         </div>
                       )}
@@ -270,7 +146,7 @@ const SkillsGame = ({ handleConfettiExplosion }) => {
             )}
           </Droppable>
         </div>
-        <div className="d-flex justify-content-center gap-3">
+        <div className="d-flex flex-column flex-md-row justify-content-center gap-3">
           {["frontend", "backend", "other"].map((category, index) => (
             <Droppable key={index} droppableId={category}>
               {(provided, snapshot) => (
@@ -285,6 +161,7 @@ const SkillsGame = ({ handleConfettiExplosion }) => {
                     paddingBottom: 40,
                     width: 250,
                   }}
+                  className="w-100 w-md-25"
                 >
                   <h4>{category}</h4>
                   {skillsKeys
@@ -308,6 +185,11 @@ const SkillsGame = ({ handleConfettiExplosion }) => {
                               ...provided.draggableProps.style,
                             }}
                           >
+                            <img
+                              className="game-img img-fluid"
+                              src={skills[key].icon}
+                              alt="img"
+                            />
                             {skills[key].name}
                           </div>
                         )}

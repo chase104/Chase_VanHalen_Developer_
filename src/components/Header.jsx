@@ -26,13 +26,13 @@ const Header = ({ handleConfettiExplosion }) => {
         // copied
         setTimeout(() => {
           setTooltipText(tooltipStates[2]); //bye
-        }, 2000);
+        }, 1000);
       }
       if (tooltipText === tooltipStates[2]) {
         //bye
         setTimeout(() => {
           setTooltipText(tooltipStates[0]); // ""
-        }, 1000);
+        }, 500);
       }
       if (tooltipText === tooltipStates[0]) {
         //bye
@@ -78,7 +78,10 @@ const Header = ({ handleConfettiExplosion }) => {
           <span>Software Educator</span>
         </p>
 
-        <a href="#about" className="btn btn-outline-light btn-lg mt-3 chevron">
+        <a
+          href="#about"
+          className="btn btn-outline-light btn-lg mt-3 chevron about-link"
+        >
           <div className="d-flex">
             <div className="me-3">
               <FontAwesomeIcon

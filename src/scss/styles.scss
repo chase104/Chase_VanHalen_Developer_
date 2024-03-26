@@ -25,8 +25,24 @@
     color: black;
   }
 }
+.down-arrow-custom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-left: -20px;
+  padding: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  background: rgba(217, 217, 217, 0.4);
+  margin-bottom: -8px;
+}
 
-.project-img-container:hover {
+.down-arrow-custom {
+  animation: pulsate 2s infinite ease-in-out;
+}
+.project-img-container:hover,
+.tacked-parent img {
   transform: scale(1.05);
   transition: transform 0.5s ease;
 }
@@ -39,26 +55,52 @@
 div.row.stats {
   margin-right: 0px !important;
 }
+.project-img-container img {
+  position: relative;
+  z-index: 3;
+}
 .icons-container-projects {
   position: absolute;
-  // background: red;
+  top: 0;
+  z-index: 2;
   width: 100%;
   height: 100%;
-  transform: scale(1.1);
+  transform: scale(1);
+  transition: all 0.5s ease;
+
   display: flex;
   justify-content: space-between;
 }
 
-.icons-container-projects:hover {
+.icons-container-projects:hover,
+.project-img-container img:hover + div,
+.tack:hover ~ div,
+.tacked-parent .icons-container-projects {
   transform: scale(1.4);
   margin-top: -20px;
-  transition: all 0.5s ease;
 }
-.icons-container-projects:hover svg {
+.icons-container-projects:hover svg,
+.project-img-container img:hover + div svg,
+.tack:hover ~ div svg,
+.tacked-parent .icons-container-projects svg {
   animation: pulsate 2s infinite ease-in-out;
 }
 .fa-primary-color {
   color: var(--bs-primary);
+}
+.tack {
+  position: absolute;
+  z-index: 6;
+  right: 8px;
+  top: 8px;
+  cursor: pointer;
+}
+.tacked {
+  color: white;
+  border-radius: 50px;
+}
+.buttons-toggle button {
+  max-width: 60px;
 }
 .tooltip-custom {
   background-color: var(--bs-primary);
@@ -76,7 +118,35 @@ div.row.stats {
 .skills-choice-button.active {
   color: white !important;
 }
+.slash:after {
+  content: "";
+  width: 2px;
+  height: 100%;
+  background-color: black;
+  z-index: 5;
+  position: absolute;
+  transform: rotate(45deg);
+}
+.skills-icons {
+  transition: all 0.5s ease;
+}
+.shrink-icons {
+  transform: scale(0);
+}
+div:has(> .game-img) {
+  background-color: blue;
+  display: flex !important;
+  gap: 8px;
+  align-items: center;
+}
+.game-img {
+  width: 30px;
+  height: 30px;
+}
 
+.max-w-35 {
+  max-width: 35px;
+}
 @keyframes pulsate {
   0% {
     transform: scale(1);
@@ -87,6 +157,24 @@ div.row.stats {
   100% {
     transform: scale(1);
   }
+}
+@keyframes lightPulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.social svg {
+  transition: transform 0.4s ease;
+}
+.social svg:hover {
+  transform: scale(1.2);
 }
 .fa-icon-animation {
   cursor: default;

@@ -5,7 +5,8 @@ import Navbar from "./components/Navbar";
 import confetti from "canvas-confetti";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
-
+import Contact from "./components/Contact";
+import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const [partyMode, setPartyMode] = useState(false);
   const handleConfettiExplosion = (event) => {
@@ -53,6 +54,7 @@ function App() {
       <About />
       <Skills handleConfettiExplosion={handleConfettiExplosion} />
       <Projects />
+      <Contact />
     </div>
   );
 }

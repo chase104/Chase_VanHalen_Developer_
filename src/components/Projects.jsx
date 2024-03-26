@@ -13,8 +13,12 @@ import {
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPingPongPaddleBall,
+  faThumbTack,
+} from "@fortawesome/free-solid-svg-icons";
 const Projects = () => {
-  const [projects, setProjects] = useState([
+  const projectsInitial = [
     {
       name: "Portfolio",
       image: project1,
@@ -22,16 +26,36 @@ const Projects = () => {
         { name: "react", logo: faReact },
         { name: "Node.js", logo: faNodeJs },
         { name: "Express", logo: faStackOverflow },
+        { name: "Express", logo: faStackOverflow },
+        { name: "Express", logo: faStackOverflow },
       ],
     },
-    { name: "Loop Studios Website", image: project2 },
+    {
+      name: "Loop Studios Website",
+      image: project2,
+      technologies: [
+        { name: "react", logo: faReact },
+        { name: "Node.js", logo: faNodeJs },
+        { name: "Express", logo: faStackOverflow },
+        { name: "Express", logo: faStackOverflow },
+        { name: "Express", logo: faStackOverflow },
+      ],
+    },
     { name: "Shortly Website", image: project3 },
     { name: "Flyo Website", image: project4 },
     { name: "Bookmark Website", image: project5 },
-  ]);
+  ];
+  const [projects, setProjects] = useState(projectsInitial);
+  const [tacked, setTacked] = useState(projectsInitial.map(() => false));
+
+  const handleTack = (index) => {
+    let newTacked = [...tacked];
+    newTacked[index] = !newTacked[index];
+    setTacked(newTacked);
+  };
 
   return (
-    <section id="projects" className="portfolio py-5 bg-light">
+    <section id="projects" className="portfolio py-6 bg-light">
       <div className="container">
         <div className="text-center mb-5">
           <h4 className="text-uppercase fw-bold text-primary">Portfolio</h4>
@@ -46,9 +70,22 @@ const Projects = () => {
                 key={project.name}
                 className={`col-md-4 mb-4 project-img-container  ${
                   index % 2 === 0 ? "offset-md-1" : "offset-md-2"
-                }`}
+                } ${tacked[index] ? "tacked-parent" : ""}`}
               >
                 <div className="project shadow-lg rounded-5 position-relative">
+                  <FontAwesomeIcon
+                    icon={faThumbTack}
+                    size="2x"
+                    className={`tack px-1 py-1 ${
+                      tacked[index] ? "tacked bg-secondary " : ""
+                    }`}
+                    onClick={() => handleTack(index)}
+                  />
+                  <img
+                    src={project.image}
+                    alt=""
+                    className="img-fluid rounded-3 "
+                  />
                   <div className="icons-container-projects">
                     {project.technologies &&
                       project.technologies.map((tech) => {
@@ -64,11 +101,6 @@ const Projects = () => {
                         );
                       })}
                   </div>
-                  <img
-                    src={project.image}
-                    alt=""
-                    className="img-fluid rounded-3 "
-                  />
                 </div>
               </div>
             );

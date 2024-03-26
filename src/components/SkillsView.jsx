@@ -5,39 +5,34 @@ import {
   faJs,
   faReact,
 } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const SkillsView = () => {
-  let skills = {
-    frontend: [
-      { name: "HTML5", icon: faHtml5, animation: "pulse" },
-      { name: "CSS3", icon: faCss3, animation: "pulse" },
-      { name: "SASS", icon: faCss3, animation: "pulse" },
-      { name: "JavaScript", icon: faJs, animation: "pulse" },
-      { name: "TypeScript", icon: faJs, animation: "pulse" },
-      { name: "React", icon: faReact, animation: "spin" },
-      { name: "Redux", icon: faReact, animation: "spin" },
-      { name: "Bootstrap", icon: faBootstrap, animation: "pulse" },
-    ],
-    backend: [
-      { name: "Node.js", icon: faJs, animation: "pulse" },
-      { name: "Express", icon: faJs, animation: "pulse" },
-      { name: "MongoDB", icon: faJs, animation: "pulse" },
-      { name: "SQL", icon: faJs, animation: "pulse" },
-      { name: "RESTful APIs", icon: faJs, animation: "pulse" },
-      { name: "GraphQL", icon: faJs, animation: "pulse" },
-    ],
-    other: [
-      { name: "Git", icon: faJs, animation: "pulse" },
-      { name: "GitHub", icon: faJs, animation: "pulse" },
-      { name: "Heroku", icon: faJs, animation: "pulse" },
-      { name: "AWS", icon: faJs, animation: "pulse" },
-      { name: "Netlify", icon: faJs, animation: "pulse" },
-      { name: "CI/CD", icon: faJs, animation: "pulse" },
-    ],
-  };
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import { faIcons } from "@fortawesome/free-solid-svg-icons";
+
+const SkillsView = ({ skills }) => {
+  const [showIcons, setShowIcons] = useState(true);
+
   return (
     <div className="row mt-5 ">
+      <div className="btn-group mb-3 buttons-toggle">
+        <button
+          className={`btn btn-outline-primary d-flex justify-content-center align-items-center slash ${
+            !showIcons ? "active" : ""
+          } `}
+          onClick={() => setShowIcons(false)}
+        >
+          <FontAwesomeIcon icon={faIcons} />
+        </button>
+        <button
+          className={`btn btn-outline-primary d-flex justify-content-center align-items-center ${
+            showIcons ? "active" : ""
+          } `}
+          onClick={() => setShowIcons(true)}
+        >
+          <FontAwesomeIcon icon={faIcons} background="transparent" />
+        </button>
+      </div>
       {Object.keys(skills).map((skillType, index) => {
         return (
           <div
@@ -50,24 +45,26 @@ const SkillsView = () => {
                 : "me-auto"
             }`}
           >
-            <h4 className="text-primary d-flex">{skillType}</h4>
+            <h4 className="text-black d-flex">{skillType}</h4>
             <ul className="list-unstyled d-flex flex-column gap-2">
               {skills[skillType].map((skill, index) => {
                 return (
                   <li
                     key={index}
-                    className={`d-flex gap-3 ${
+                    className={`d-flex gap-3 align-items-center bg-light ${
                       skill.animation == "pulse"
                         ? "fa-icon-animation"
                         : "fa-spinning"
                     }`}
                   >
-                    <FontAwesomeIcon
-                      size="2x"
-                      color="red"
-                      icon={skill.icon}
-                      className="me-2 w-25"
+                    <img
+                      src={skill.logo}
+                      alt="ts"
+                      className={`w-25 max-w-35 skills-icons ${
+                        showIcons ? "" : "shrink-icons"
+                      }`}
                     />
+
                     {skill.name}
                   </li>
                 );

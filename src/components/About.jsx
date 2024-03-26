@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import headshot from "../images/headshot.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowDown,
   faAward,
   faCode,
   faTasks,
@@ -89,7 +90,11 @@ const About = () => {
   }, []);
 
   return (
-    <section ref={aboutRef} id="about" className="about bg-light pt-6">
+    <section
+      ref={aboutRef}
+      id="about"
+      className="about bg-light pt-6 position-relative"
+    >
       <div className="container">
         <div className="text-center">
           <h4 className="text-uppercase fw-bold text-primary">About Me</h4>
@@ -140,6 +145,14 @@ const About = () => {
           </div>
         ))}
       </div>
+      <a href="#skills ">
+        <FontAwesomeIcon
+          icon={faArrowDown}
+          size="3x"
+          className=" down-arrow-custom "
+          color="black"
+        />
+      </a>
     </section>
   );
 };
