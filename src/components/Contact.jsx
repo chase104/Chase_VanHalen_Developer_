@@ -11,10 +11,10 @@ const Contact = () => {
         </div>
         <form
           action="https://formspree.io/f/meqyropg"
-          className="d-flex flex-column align-items-center w-25 mx-auto"
+          className="d-flex flex-column align-items-center w-50  mx-auto"
           method="POST"
         >
-          <div className="mb-3 w-100">
+          <div className="mb-3 w-100 w-md-50">
             <label for="email" className="form-label">
               Your email:
             </label>

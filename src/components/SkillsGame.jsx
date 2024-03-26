@@ -131,15 +131,14 @@ const SkillsGame = (props) => {
                 {provided.placeholder}
                 <div>
                   {unplacedSkills.length ? (
-                    "Place the skills in the correct category"
+                    <p className="fs-3">
+                      Place the skills in the correct category
+                    </p>
                   ) : (
-                    <a href="#projects">
-                      {" "}
-                      <h3 className="text-primary">
-                        Congratulations! Now you can check out my projects
-                        below!
-                      </h3>
-                    </a>
+                    <h3 className="text-primary">
+                      Congratulations! Now you've got decent a sense of my tech
+                      skills!
+                    </h3>
                   )}
                 </div>
               </div>
