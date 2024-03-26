@@ -16,7 +16,7 @@ const SkillsView = () => {
       { name: "JavaScript", icon: faJs, animation: "pulse" },
       { name: "TypeScript", icon: faJs, animation: "pulse" },
       { name: "React", icon: faReact, animation: "spin" },
-      { name: "Redux", icon: faReact, animation: "pulse" },
+      { name: "Redux", icon: faReact, animation: "spin" },
       { name: "Bootstrap", icon: faBootstrap, animation: "pulse" },
     ],
     backend: [

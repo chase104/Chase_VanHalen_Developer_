@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import confetti from "canvas-confetti";
 import Skills from "./components/Skills";
+import Projects from "./components/Projects";
 
 function App() {
   const [partyMode, setPartyMode] = useState(false);
@@ -50,7 +51,8 @@ function App() {
       <Navbar />
       <Header handleConfettiExplosion={handleConfettiExplosion} />
       <About />
-      <Skills />
+      <Skills handleConfettiExplosion={handleConfettiExplosion} />
+      <Projects />
     </div>
   );
 }

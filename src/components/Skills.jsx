@@ -9,8 +9,9 @@ import { faJ } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SkillsView from "./SkillsView";
 import { useState } from "react";
+import SkillsGame from "./SkillsGame";
 
-const Skills = () => {
+const Skills = ({ handleConfettiExplosion }) => {
   const [selectedView, setSelectedView] = useState(null);
   return (
     <section className="my-6 text-center min-vh-100">
@@ -44,7 +45,9 @@ const Skills = () => {
         {/* skills - 3 columns of frontend, backend, other */}
         {selectedView === "skills" && <SkillsView />}
         {/* game - game component */}
-        {selectedView === "game" && <div>game</div>}
+        {selectedView === "game" && (
+          <SkillsGame handleConfettiExplosion={handleConfettiExplosion} />
+        )}
       </div>
     </section>
   );

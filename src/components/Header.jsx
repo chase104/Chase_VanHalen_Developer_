@@ -97,10 +97,13 @@ const Header = ({ handleConfettiExplosion }) => {
           <div role="button" onClick={copyEmailToClipboard}>
             <FontAwesomeIcon icon={faEnvelope} size="3x" color="white" />
           </div>
-          <a href="#">
+          <a
+            href="https://www.linkedin.com/in/chase-van-halen-8068a5108/"
+            target="_blank"
+          >
             <FontAwesomeIcon icon={faLinkedin} size="3x" color="white" />
           </a>
-          <a href="#">
+          <a href="https://github.com/chase104" target="_blank">
             <FontAwesomeIcon icon={faGithub} size="3x" color="white" />
           </a>
         </div>
