@@ -30,6 +30,7 @@ const Navbar = () => {
       <div className="container">
         <a className="navbar-brand d-flex gap-3" href="#">
           <img src={Logo} alt="logo" />
+          <span>Chase Van Halen</span>
           {/* <span className="fw-bold fs-4">CV</span> */}
           {/* <FontAwesomeIcon icon={faReact} size="2x" color="primary" />
 

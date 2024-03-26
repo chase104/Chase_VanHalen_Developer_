@@ -9,7 +9,8 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "sass:build": "sass --no-source-map src/scss:src/css",
-    "sass:watch": "sass --no-source-map --watch src/scss:src/css"
+    "sass:watch": "sass --no-source-map --watch src/scss:src/css",
+    "development": "concurrently \"npm run dev\" \"npm run sass:watch\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
@@ -18,9 +19,14 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "bootstrap": "^5.3.3",
+    "canvas-confetti": "^1.9.2",
     "react": "^18.2.0",
+    "react-confetti": "^6.1.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.72.0"
+    "react-tsparticles": "^2.12.2",
+    "react-use": "^17.5.0",
+    "sass": "^1.72.0",
+    "tsparticles": "^3.3.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

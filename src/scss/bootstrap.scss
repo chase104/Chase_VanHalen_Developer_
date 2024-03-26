@@ -46,13 +46,13 @@ $spacers: (
   8: $spacer * 12,
 ) !default;
 
-// Container
-$container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 980px,
-  xxl: 1000px,
-) !default;
+// // Container
+// $container-max-widths: (
+//   sm: 540px,
+//   md: 720px,
+//   lg: 960px,
+//   xl: 980px,
+//   xxl: 1000px,
+// ) !default;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";

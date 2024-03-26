@@ -25,3 +25,68 @@
     color: black;
   }
 }
+
+// @media (max-width: 756px) {
+//   .row .stat-block {
+//     padding-right: 0px !important;
+//     margin-right: 0px !important;
+//   }
+// }
+div.row.stats {
+  margin-right: 0px !important;
+}
+.fa-primary-color {
+  color: var(--bs-primary);
+}
+.tooltip-custom {
+  background-color: var(--bs-primary);
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+  /* Adjust as needed for better positioning */
+  transform: translate(-50%, -100%);
+  z-index: 1000; /* Ensure it appears above other content */
+}
+.skills-choice-button {
+  min-width: 200px !important;
+}
+.skills-choice-button:hover,
+.skills-choice-button.active {
+  color: white !important;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.fa-icon-animation {
+  cursor: default;
+}
+.fa-icon-animation:hover > svg {
+  display: inline-block;
+  animation: pulsate 2s infinite ease-in-out;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.fa-spinning {
+  cursor: default;
+}
+
+.fa-spinning:hover > svg {
+  display: inline-block;
+  animation: spin 2s linear infinite;
+}
