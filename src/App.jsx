@@ -53,7 +53,7 @@ function App() {
       <Header handleConfettiExplosion={handleConfettiExplosion} />
       <About />
       <Skills handleConfettiExplosion={handleConfettiExplosion} />
-      <Projects />
+      {/* <Projects /> */}
       <Contact />
     </div>
   );
