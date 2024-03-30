@@ -61,6 +61,7 @@ const Skills = ({ handleConfettiExplosion }) => {
       { name: "MongoDB", logo: mongo, animation: "pulse" },
       { name: "Apollo Server", logo: apollo, animation: "pulse" },
       { name: "Node.js", logo: node, animation: "pulse" },
+      { name: "Next.js", logo: next, animation: "pulse" },
       { name: "Express", logo: express, animation: "pulse" },
       { name: "RESTful APIs", logo: rest, animation: "pulse" },
       { name: "JWT", logo: jwt, animation: "pulse" },
@@ -78,6 +79,7 @@ const Skills = ({ handleConfettiExplosion }) => {
       { name: "Heroku", logo: heroku, animation: "pulse" },
       { name: "Netlify", logo: netlify, animation: "pulse" },
       { name: "Render", logo: render, animation: "pulse" },
+      { name: "Stripe", logo: stripe, animation: "pulse" },
     ],
   };
   const [selectedView, setSelectedView] = useState(null);
