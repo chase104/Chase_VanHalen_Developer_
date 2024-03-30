@@ -52,10 +52,12 @@ const Skills = ({ handleConfettiExplosion }) => {
       { name: "SASS", logo: sass, animation: "pulse" },
       { name: "Bootstrap", logo: bootstrap, animation: "pulse" },
       { name: "Material UI", logo: mui, animation: "pulse" },
+      { name: "Apollo Client", logo: mui, animation: "pulse" },
     ],
     backend: [
       { name: "SQL", logo: sql, animation: "pulse" },
       { name: "MongoDB", logo: mongo, animation: "pulse" },
+      { name: "Apollo Server", logo: mongo, animation: "pulse" },
       { name: "Node.js", logo: node, animation: "pulse" },
       { name: "Express", logo: express, animation: "pulse" },
       { name: "RESTful APIs", logo: rest, animation: "pulse" },
@@ -68,6 +70,8 @@ const Skills = ({ handleConfettiExplosion }) => {
       { name: "Vitest Testing", logo: vitest, animation: "pulse" },
       { name: "Git", logo: git, animation: "pulse" },
       { name: "GitHub", logo: github, animation: "pulse" },
+      { name: "GraphQL", logo: github, animation: "pulse" },
+
       { name: "Agile", logo: agile, animation: "pulse" },
       { name: "Heroku", logo: heroku, animation: "pulse" },
       { name: "Netlify", logo: netlify, animation: "pulse" },
