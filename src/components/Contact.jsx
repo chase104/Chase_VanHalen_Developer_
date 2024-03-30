@@ -15,7 +15,7 @@ const Contact = () => {
           method="POST"
         >
           <div className="mb-3 w-100 w-md-50">
-            <label for="email" className="form-label">
+            <label htmlFor="email" className="form-label">
               Your email:
             </label>
             <input
