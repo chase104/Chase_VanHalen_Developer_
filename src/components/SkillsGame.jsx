@@ -76,6 +76,7 @@ const SkillsGame = (props) => {
   let unplacedSkills = skillsKeys.filter(
     (key) => skills[key].currentLocation == "skills"
   );
+  console.log({ unplacedSkills });
   return (
     <div className="">
       <DragDropContext onDragEnd={onDragEnd} className="row">
@@ -95,38 +96,40 @@ const SkillsGame = (props) => {
               >
                 <h4>Chase's Skills</h4>
                 <div className="buttons-container d-flex justify-content-center flex-wrap gap-1">
-                  {unplacedSkills.map((key, index) => (
-                    <Draggable key={key} draggableId={key} index={index}>
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className="w-md-25 w-100 w-sm-50"
-                          style={{
-                            userSelect: "none",
-                            padding: 16,
-                            borderRadius: "5px",
-                            margin: "0 0 8px 0",
-                            minHeight: "50px",
-                            backgroundColor: snapshot.isDragging
-                              ? "#263B4A"
-                              : "#456C86",
-                            color: "white",
-                            maxWidth: 200,
-                            ...provided.draggableProps.style,
-                          }}
-                        >
-                          <img
-                            className="game-img img-fluid"
-                            src={skills[key].icon}
-                            alt="img"
-                          />
-                          {skills[key].name}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
+                  {unplacedSkills
+                    .sort((a, b) => a.localeCompare(b))
+                    .map((key, index) => (
+                      <Draggable key={key} draggableId={key} index={index}>
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            className="w-md-25 w-100 w-sm-50"
+                            style={{
+                              userSelect: "none",
+                              padding: 16,
+                              borderRadius: "5px",
+                              margin: "0 0 8px 0",
+                              minHeight: "50px",
+                              backgroundColor: snapshot.isDragging
+                                ? "#263B4A"
+                                : "#456C86",
+                              color: "white",
+                              maxWidth: 200,
+                              ...provided.draggableProps.style,
+                            }}
+                          >
+                            <img
+                              className="game-img img-fluid"
+                              src={skills[key].icon}
+                              alt="img"
+                            />
+                            {skills[key].name}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
                 </div>
                 {provided.placeholder}
                 <div>
@@ -146,59 +149,61 @@ const SkillsGame = (props) => {
           </Droppable>
         </div>
         <div className="d-flex flex-column flex-md-row justify-content-center gap-3">
-          {["frontend", "backend", "other"].map((category, index) => (
-            <Droppable key={index} droppableId={category}>
-              {(provided, snapshot) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  style={{
-                    backgroundColor: snapshot.isDraggingOver
-                      ? "lightblue"
-                      : "lightgrey",
-                    padding: 20,
-                    paddingBottom: 40,
-                    width: 250,
-                  }}
-                  className="w-100 w-md-25"
-                >
-                  <h4>{category}</h4>
-                  {skillsKeys
-                    .filter((key) => skills[key].currentLocation === category)
-                    .map((key, index) => (
-                      <Draggable key={key} draggableId={key} index={index}>
-                        {(provided, snapshot) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={{
-                              userSelect: "none",
-                              padding: 16,
-                              margin: "0 0 8px 0",
-                              minHeight: "50px",
-                              backgroundColor: snapshot.isDragging
-                                ? "#263B4A"
-                                : "#456C86",
-                              color: "white",
-                              ...provided.draggableProps.style,
-                            }}
-                          >
-                            <img
-                              className="game-img img-fluid"
-                              src={skills[key].icon}
-                              alt="img"
-                            />
-                            {skills[key].name}
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          ))}
+          {["frontend", "backend", "General Development Tools"].map(
+            (category, index) => (
+              <Droppable key={index} droppableId={category}>
+                {(provided, snapshot) => (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    style={{
+                      backgroundColor: snapshot.isDraggingOver
+                        ? "lightblue"
+                        : "lightgrey",
+                      padding: 20,
+                      paddingBottom: 40,
+                      width: 250,
+                    }}
+                    className="w-100 w-md-25"
+                  >
+                    <h4>{category[0].toUpperCase() + category.slice(1)}</h4>
+                    {skillsKeys
+                      .filter((key) => skills[key].currentLocation === category)
+                      .map((key, index) => (
+                        <Draggable key={key} draggableId={key} index={index}>
+                          {(provided, snapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={{
+                                userSelect: "none",
+                                padding: 16,
+                                margin: "0 0 8px 0",
+                                minHeight: "50px",
+                                backgroundColor: snapshot.isDragging
+                                  ? "#263B4A"
+                                  : "#456C86",
+                                color: "white",
+                                ...provided.draggableProps.style,
+                              }}
+                            >
+                              <img
+                                className="game-img img-fluid"
+                                src={skills[key].icon}
+                                alt="img"
+                              />
+                              {skills[key].name}
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            )
+          )}
         </div>
       </DragDropContext>
     </div>

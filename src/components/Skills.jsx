@@ -34,6 +34,8 @@ import express from "../assets/express.png";
 import heroku from "../assets/heroku.png";
 import netlify from "../assets/netlify.png";
 import render from "../assets/render.png";
+import graphql from "../assets/graphql.png";
+import apollo from "../assets/apollo.png";
 import { faJ } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SkillsView from "./SkillsView";
@@ -52,25 +54,25 @@ const Skills = ({ handleConfettiExplosion }) => {
       { name: "SASS", logo: sass, animation: "pulse" },
       { name: "Bootstrap", logo: bootstrap, animation: "pulse" },
       { name: "Material UI", logo: mui, animation: "pulse" },
-      { name: "Apollo Client", logo: mui, animation: "pulse" },
+      { name: "Apollo Client", logo: apollo, animation: "pulse" },
     ],
     backend: [
       { name: "SQL", logo: sql, animation: "pulse" },
       { name: "MongoDB", logo: mongo, animation: "pulse" },
-      { name: "Apollo Server", logo: mongo, animation: "pulse" },
+      { name: "Apollo Server", logo: apollo, animation: "pulse" },
       { name: "Node.js", logo: node, animation: "pulse" },
       { name: "Express", logo: express, animation: "pulse" },
       { name: "RESTful APIs", logo: rest, animation: "pulse" },
       { name: "JWT", logo: jwt, animation: "pulse" },
       { name: "Passport Session", logo: passport, animation: "pulse" },
     ],
-    other: [
+    ["General Development Tools"]: [
       { name: "AWS", logo: aws, animation: "pulse" },
       { name: "Jest Testing", logo: jest, animation: "pulse" },
       { name: "Vitest Testing", logo: vitest, animation: "pulse" },
       { name: "Git", logo: git, animation: "pulse" },
       { name: "GitHub", logo: github, animation: "pulse" },
-      { name: "GraphQL", logo: github, animation: "pulse" },
+      { name: "GraphQL", logo: graphql, animation: "pulse" },
 
       { name: "Agile", logo: agile, animation: "pulse" },
       { name: "Heroku", logo: heroku, animation: "pulse" },
