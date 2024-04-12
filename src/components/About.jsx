@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import headshot from "../images/headshot.jpg";
+import headshot from "../assets/linkedInProfile.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowDown,
