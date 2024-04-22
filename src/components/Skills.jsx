@@ -59,6 +59,7 @@ const Skills = ({ handleConfettiExplosion }) => {
     backend: [
       { name: "SQL", logo: sql, animation: "pulse" },
       { name: "MongoDB", logo: mongo, animation: "pulse" },
+      { name: "GraphQL", logo: graphql, animation: "pulse" },
       { name: "Node.js", logo: node, animation: "pulse" },
       { name: "Next.js", logo: next, animation: "pulse" },
       { name: "Express", logo: express, animation: "pulse" },
@@ -68,6 +69,7 @@ const Skills = ({ handleConfettiExplosion }) => {
     ],
     ["DevOps / Tools"]: [
       { name: "Cloud Computing (aws)", logo: aws, animation: "pulse" },
+
       { name: "Docker", logo: docker, animation: "pulse" },
       { name: "Jest Testing", logo: jest, animation: "pulse" },
       { name: "Vitest Testing", logo: vitest, animation: "pulse" },
