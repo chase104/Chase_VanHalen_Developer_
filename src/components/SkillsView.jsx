@@ -51,7 +51,7 @@ const SkillsView = ({ skills }) => {
                 return (
                   <li
                     key={index}
-                    className={`d-flex gap-3 align-items-center bg-light ${
+                    className={`d-flex gap-3 align-items-center text-start bg-light ${
                       skill.animation == "pulse"
                         ? "fa-icon-animation"
                         : "fa-spinning"

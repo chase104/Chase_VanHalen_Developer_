@@ -7,7 +7,7 @@ const Contact = () => {
         <div className="text-center">
           <h4 className="text-uppercase fw-bold text-primary">Contact</h4>
           <hr className="w-25 mx-auto" />
-          <h2 className="mb-4">I'd love to hear from you!</h2>
+          <h2 className="mb-4">Let's see what we can do together!</h2>
         </div>
         <form
           action="https://formspree.io/f/meqyropg"
