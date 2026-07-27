@@ -74,8 +74,9 @@ const Header = ({ handleConfettiExplosion }) => {
         </h1>
 
         <p className="roles text-white text-uppercase fs-4">
-          <span>Full Stack Web Developer | </span>
-          <span>EdTech & React Specialist</span>
+          <span>Senior Software Engineer</span>
+          <br />
+
         </p>
 
         <a
@@ -91,7 +92,7 @@ const Header = ({ handleConfettiExplosion }) => {
               />{" "}
             </div>
             <div className="text-start">
-              <span>More About Me</span>
+              <span>See My Impact</span>
             </div>
           </div>
         </a>

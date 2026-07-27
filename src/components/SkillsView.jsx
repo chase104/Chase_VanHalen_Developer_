@@ -14,7 +14,7 @@ const SkillsView = ({ skills }) => {
   const [showIcons, setShowIcons] = useState(true);
 
   return (
-    <div className="row mt-5 ">
+    <div className="row mt-5 g-3">
       <div className="btn-group mb-3 buttons-toggle">
         <button
           className={`btn btn-outline-primary d-flex justify-content-center align-items-center slash ${
@@ -37,39 +37,46 @@ const SkillsView = ({ skills }) => {
         return (
           <div
             key={index}
-            className={`col-md-3 bg-light p-4 ${
-              index == 1
-                ? "mx-md-3 my-3 my-md-0"
-                : index === 0
-                ? "ms-auto"
-                : "me-auto"
-            }`}
+            className="col-12 col-sm-6 col-lg-3 p-2"
           >
-            <h4 className="text-black d-flex">{skillType}</h4>
-            <ul className="list-unstyled d-flex flex-column gap-2">
-              {skills[skillType].map((skill, index) => {
-                return (
-                  <li
-                    key={index}
-                    className={`d-flex gap-3 align-items-center text-start bg-light ${
-                      skill.animation == "pulse"
-                        ? "fa-icon-animation"
-                        : "fa-spinning"
-                    }`}
-                  >
-                    <img
-                      src={skill.logo}
-                      alt="ts"
-                      className={`w-25 max-w-35 skills-icons ${
-                        showIcons ? "" : "shrink-icons"
+            <div className="skills-view-card">
+              <h4 className="text-primary fw-bold text-capitalize border-bottom pb-2 mb-3">{skillType}</h4>
+              <ul className="list-unstyled d-flex flex-column gap-2 mb-0">
+                {skills[skillType].map((skill, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className={`skill-view-badge skill-tooltip-container d-flex align-items-center text-start ${
+                        skill.animation === "pulse"
+                          ? "fa-icon-animation"
+                          : "fa-spinning"
                       }`}
-                    />
+                    >
+                      <img
+                        src={skill.logo}
+                        alt={skill.name}
+                        className={`skills-icons ${
+                          showIcons ? "" : "shrink-icons"
+                        }`}
+                      />
 
-                    {skill.name}
-                  </li>
-                );
-              })}
-            </ul>
+                      <span>{skill.name}</span>
+
+                      {skill.description && (
+                        <div className="skill-tooltip">
+                          {skill.company && (
+                            <div className="tooltip-company">
+                              {skill.company}
+                            </div>
+                          )}
+                          <div className="tooltip-desc">{skill.description}</div>
+                        </div>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         );
       })}

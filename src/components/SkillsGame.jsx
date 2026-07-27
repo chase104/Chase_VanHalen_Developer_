@@ -1,6 +1,92 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
+const TidbitBanner = ({ currentSkill }) => {
+  const [displaySkill, setDisplaySkill] = useState(currentSkill);
+  const [prevSkill, setPrevSkill] = useState(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    if (currentSkill && (!displaySkill || currentSkill.id !== displaySkill.id)) {
+      setPrevSkill(displaySkill);
+      setDisplaySkill(currentSkill);
+      setIsAnimating(true);
+
+      const timer = setTimeout(() => {
+        setPrevSkill(null);
+        setIsAnimating(false);
+      }, 400);
+
+      return () => clearTimeout(timer);
+    }
+  }, [currentSkill]);
+
+  if (!displaySkill && !prevSkill) return null;
+
+  const renderSkillContent = (skill) => (
+    <div className="d-flex flex-column gap-2 w-100">
+      {/* 1. Trivia Tidbit Section */}
+      {skill.tidbit && (
+        <div className="skill-tidbit-banner alert text-start shadow-sm rounded-4 px-4 py-3 mb-0">
+          <div className="d-flex align-items-center gap-2 mb-1">
+            <span className="fs-5">💡</span>
+            <strong className="text-dark fs-6">
+              Did you know? ({skill.name})
+            </strong>
+          </div>
+          <p className="mb-0 text-dark fs-6">{skill.tidbit}</p>
+        </div>
+      )}
+
+      {/* 2. Experience / Tooltip Content Section */}
+      {(skill.company || skill.description) && (
+        <div className="skill-experience-banner alert text-start shadow-sm rounded-4 px-4 py-3 mb-0">
+          <div className="d-flex align-items-center justify-content-between mb-1 flex-wrap gap-2">
+            <div className="d-flex align-items-center gap-2">
+              <span className="fs-5">💼</span>
+              <strong className="text-dark fs-6">
+                Where & How I Used It ({skill.name}):
+              </strong>
+            </div>
+            {skill.company && (
+              <span className="badge bg-primary text-white rounded-pill px-3 py-1 fs-7">
+                {skill.company}
+              </span>
+            )}
+          </div>
+          {skill.description && (
+            <p className="mb-0 text-dark fs-6">{skill.description}</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="tidbit-slider-container">
+      {prevSkill && (
+        <div
+          key={`prev-${prevSkill.id}`}
+          className="skill-banner-wrapper skill-tidbit-banner-exit tidbit-slide-out-left"
+        >
+          {renderSkillContent(prevSkill)}
+        </div>
+      )}
+
+      {displaySkill && (
+        <div
+          key={`curr-${displaySkill.id}`}
+          className={`skill-banner-wrapper skill-tidbit-banner-entry ${
+            isAnimating ? "tidbit-slide-in-right" : ""
+          }`}
+        >
+          {renderSkillContent(displaySkill)}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const SkillsGame = (props) => {
   let handleConfettiExplosion = props.handleConfettiExplosion;
   let propsSkills = props.skills;
@@ -18,7 +104,10 @@ const SkillsGame = (props) => {
           category: category,
           currentLocation: "skills",
           animation: skill.animation,
-          icon: skill.logo, // Directly use the logo provided
+          icon: skill.logo,
+          company: skill.company,
+          description: skill.description,
+          tidbit: skill.tidbit,
         };
       });
     });
@@ -28,27 +117,26 @@ const SkillsGame = (props) => {
 
   const [skills, setSkills] = useState(transformSkills(propsSkills));
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [lastPlacedSkill, setLastPlacedSkill] = useState(null);
   const [skillsKeys, setSkillsKeys] = useState(
     Object.keys(skills).sort(() => Math.random() - 0.5)
   );
 
-  console.log({ skills });
   const onDragEnd = (result) => {
-    console.log(result);
-    console.log(skills[result.draggableId]);
     if (!result.destination) return;
     if (
       result.destination.droppableId !== skills[result.draggableId].category &&
       result.destination.droppableId !== "skills"
     )
       return;
-    console.log(skills[result.draggableId]);
+
     let selectedItem = {
       ...skills[result.draggableId],
       currentLocation: result.destination.droppableId,
     };
     const items = { ...skills, [result.draggableId]: selectedItem };
     if (result.destination.droppableId !== "skills") {
+      setLastPlacedSkill(selectedItem);
       handleConfettiExplosion({
         clientX: tooltipPosition.x,
         clientY: tooltipPosition.y,
@@ -78,24 +166,26 @@ const SkillsGame = (props) => {
   );
   console.log({ unplacedSkills });
   return (
-    <div className="">
-      <DragDropContext onDragEnd={onDragEnd} className="row">
+    <div className="py-2">
+      <DragDropContext onDragEnd={onDragEnd}>
         <div className="col-md-12">
           <Droppable droppableId={"skills"}>
             {(provided, snapshot) => (
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                style={{
-                  backgroundColor: snapshot.isDraggingOver
-                    ? "lightblue"
-                    : "lightgrey",
-                  padding: 20,
-                }}
-                className="col-md-12 my-4"
+                className={`skills-game-container my-4 ${
+                  snapshot.isDraggingOver ? "is-dragging-over" : ""
+                }`}
               >
-                <h4>Chase's Skills</h4>
-                <div className="buttons-container text-start d-flex justify-content-center flex-wrap gap-1">
+                <div className="d-flex align-items-center justify-content-center gap-3 mb-3 flex-wrap">
+                  <h4 className="chases-skills-title mb-0 fs-3">Chase's Skills</h4>
+                  <span className="skill-count-badge">
+                    {unplacedSkills.length} remaining
+                  </span>
+                </div>
+                
+                <div className="buttons-container text-start d-flex justify-content-center flex-wrap gap-2">
                   {unplacedSkills
                     .sort((a, b) => a.localeCompare(b))
                     .map((key, index) => (
@@ -105,71 +195,78 @@ const SkillsGame = (props) => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className="w-md-25 w-100 w-sm-50"
+                            className={`skill-badge-item skill-tooltip-container ${
+                              snapshot.isDragging ? "is-dragging" : ""
+                            }`}
                             style={{
-                              userSelect: "none",
-                              padding: 16,
-                              borderRadius: "5px",
-                              margin: "0 0 8px 0",
-                              minHeight: "50px",
-                              backgroundColor: snapshot.isDragging
-                                ? "#263B4A"
-                                : "#456C86",
-                              color: "white",
-                              maxWidth: 200,
                               ...provided.draggableProps.style,
                             }}
                           >
-                            <img
-                              className="game-img img-fluid"
-                              src={skills[key].icon}
-                              alt="img"
-                            />
-                            {skills[key].name}
+                            <div className="skill-icon-wrapper">
+                              <img
+                                src={skills[key].icon}
+                                alt={skills[key].name}
+                              />
+                            </div>
+                            <span>{skills[key].name}</span>
+
+                            {!snapshot.isDragging && skills[key].description && (
+                              <div className="skill-tooltip">
+                                {skills[key].company && (
+                                  <div className="tooltip-company">
+                                    {skills[key].company}
+                                  </div>
+                                )}
+                                <div className="tooltip-desc">
+                                  {skills[key].description}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         )}
                       </Draggable>
                     ))}
                 </div>
                 {provided.placeholder}
-                <div>
+                <div className="mt-3 text-center">
                   {unplacedSkills.length ? (
-                    <p className="fs-3">
-                      Place the skills in the correct category
+                    <p className="fs-5 text-muted fw-semibold mb-3">
+                      Drag & drop each skill into its matching category below!
                     </p>
                   ) : (
-                    <h3 className="text-primary">
-                      Congratulations! Now you've got a good sense of my tech
-                      skills.{" "}
-                      <a href="#contact">
-                        {" "}
-                        Let's talk about how we can work together.
+                    <div className="alert alert-success d-inline-block px-4 py-3 shadow-sm rounded-4 mb-3">
+                      <h4 className="alert-heading fw-bold mb-1 text-primary">🎉 Congratulations!</h4>
+                      <p className="mb-2 text-dark fs-5">
+                        Now you've got a good sense of my tech skills.
+                      </p>
+                      <a href="#contact" className="btn btn-primary fw-semibold rounded-pill px-4 py-2">
+                        Let's talk about how we can work together →
                       </a>
-                    </h3>
+                    </div>
                   )}
+
+                  <TidbitBanner currentSkill={lastPlacedSkill} />
                 </div>
               </div>
             )}
           </Droppable>
         </div>
-        <div className="d-flex flex-column flex-md-row justify-content-center gap-3">
+
+        <div className="d-flex flex-column flex-md-row justify-content-center gap-3 mt-3">
           {Object.keys(propsSkills).map((category, index) => (
             <Droppable key={index} droppableId={category}>
               {(provided, snapshot) => (
                 <div
                   {...provided.droppableProps}
                   ref={provided.innerRef}
-                  style={{
-                    backgroundColor: snapshot.isDraggingOver
-                      ? "lightblue"
-                      : "lightgrey",
-                    padding: 20,
-                    paddingBottom: 40,
-                    width: 250,
-                  }}
-                  className="w-100 w-md-25"
+                  className={`skills-category-box flex-fill ${
+                    snapshot.isDraggingOver ? "is-dragging-over" : ""
+                  }`}
+                  style={{ minWidth: "220px" }}
                 >
-                  <h4>{category[0].toUpperCase() + category.slice(1)}</h4>
+                  <h4 className="fw-bold text-capitalize text-primary border-bottom pb-2 mb-3 text-center">
+                    {category}
+                  </h4>
                   {skillsKeys
                     .filter((key) => skills[key].currentLocation === category)
                     .map((key, index) => (
@@ -179,24 +276,33 @@ const SkillsGame = (props) => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
+                            className={`skill-badge-item skill-tooltip-container ${
+                              snapshot.isDragging ? "is-dragging" : ""
+                            }`}
                             style={{
-                              userSelect: "none",
-                              padding: 16,
-                              margin: "0 0 8px 0",
-                              minHeight: "50px",
-                              backgroundColor: snapshot.isDragging
-                                ? "#263B4A"
-                                : "#456C86",
-                              color: "white",
                               ...provided.draggableProps.style,
                             }}
                           >
-                            <img
-                              className="game-img img-fluid"
-                              src={skills[key].icon}
-                              alt="img"
-                            />
-                            {skills[key].name}
+                            <div className="skill-icon-wrapper">
+                              <img
+                                src={skills[key].icon}
+                                alt={skills[key].name}
+                              />
+                            </div>
+                            <span>{skills[key].name}</span>
+
+                            {!snapshot.isDragging && skills[key].description && (
+                              <div className="skill-tooltip">
+                                {skills[key].company && (
+                                  <div className="tooltip-company">
+                                    {skills[key].company}
+                                  </div>
+                                )}
+                                <div className="tooltip-desc">
+                                  {skills[key].description}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         )}
                       </Draggable>

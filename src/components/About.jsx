@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowDown,
   faAward,
-  faCode,
+  faCodePullRequest,
   faTasks,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
@@ -12,27 +12,35 @@ const About = () => {
   const [numbers, setNumbers] = useState([
     {
       value: 0,
-      title: "Junior Developers Mentored",
-      end: 145,
-      icon: faUsers,
+      formattedValue: "0",
+      title: "Code Reviews Conducted",
+      end: 265,
+      icon: faCodePullRequest,
+      hasPlus: true,
     },
     {
       value: 0,
+      formattedValue: "0",
       title: "Issues Solved",
-      end: 502,
+      end: 880,
       icon: faTasks,
+      hasPlus: true,
     },
     {
       value: 0,
-      title: "Lines Of Code Written in Lastest Project",
-      end: 68281,
-      icon: faCode,
+      formattedValue: "0",
+      title: "Users Served",
+      end: 800000,
+      icon: faUsers,
+      hasPlus: true,
     },
     {
       value: 0,
+      formattedValue: "0",
       title: "International Startup Awards",
       end: 3,
       icon: faAward,
+      hasPlus: false,
     },
   ]);
 
@@ -44,7 +52,7 @@ const About = () => {
         if (entry.isIntersecting) {
           setNumbers((prevNumbers) =>
             prevNumbers.map((item) => {
-              const duration = 1200; // Animation duration in milliseconds
+              const duration = 2000; // Animation duration in milliseconds
               const increment = (item.end / duration) * 10; // Calculate increment to ensure all counters finish at the same time
 
               const animateNumber = (currentValue, endValue) => {
@@ -98,36 +106,7 @@ const About = () => {
       <div className="container">
         <div className="text-center">
           <h4 className="text-uppercase fw-bold text-primary">About Me</h4>
-          <hr className="w-25 mx-auto" />
-          <h2 className="mb-4">Let me introduce myself.</h2>
-        </div>
-        <div className="about-content  align-items-center h-100 row">
-          <img
-            src={headshot}
-            alt="headshot"
-            className="about-img img-fluid rounded-circle col-9 mb-3 mb-md-0 col-sm-6   col-md-3   mx-auto"
-          />
-          <p className="lead fw-normal col-lg-9 fs-5">
-            As a Full Stack Web Developer from Indiana, my tech journey began
-            about 5 years ago, diverting from a career in law despite a 98th
-            percentile LSAT score (171/180) and scholarship offers. A passion
-            for technology led me to diligently master foundational web
-            technologies — JavaScript, HTML, and CSS — then to advanced tools
-            and libraries like React, TypeScript, and Express.js. My career
-            highlights include creating web-interfaces for 7 Houston factories,
-            servicing 20+ clients, and architecting/developing a startup web app
-            currently live in the European market. Beyond my technical
-            expertise, my bilingual (English/Spanish) abilities have been
-            instrumental in bridging communication gaps, enhancing client
-            relationships, and expanding market reach. Eager for new challenges,
-            I&apos;m looking forward to opportunities that allow me to leverage
-            my skills and experiences in innovative projects.
-            {/* 3 continents (international) */}
-            {/* bilingual */}
-          </p>
-        </div>
-      </div>
-      <div className="row stats py-5">
+           <div className="row stats py-5">
         {numbers.map((num, index) => (
           <div
             key={index}
@@ -139,12 +118,36 @@ const About = () => {
                 size="2x"
                 className="fa-primary-color"
               />
-              <h2 className="counter mb-0 xl-text">{num.formattedValue}</h2>
+              <h2 className="counter mb-0 xl-text">
+                {num.formattedValue}
+                {num.hasPlus ? "+" : ""}
+              </h2>
             </div>
             <p>{num.title}</p>
           </div>
         ))}
       </div>
+          <hr className="w-25 mx-auto" />
+          <h2 className="mb-4">My Background</h2>
+        </div>
+        <div className="about-content align-items-center h-100 row">
+          <img
+            src={headshot}
+            alt="headshot"
+            className="about-img img-fluid rounded-circle col-9 mb-4 mb-md-0 col-sm-6 col-md-4 col-lg-4 mx-auto"
+          />
+          <p className="lead fw-normal col-12 col-md-8 col-lg-8 fs-5">
+              I am a Senior Full-Stack Engineer and Systems Architect specializing in highly concurrent backend systems and production-grade AI integrations. With a focus on scale and resilience, I build architectures that solve complex business problems, from engineering high-throughput microservices to deploying agentic AI workflows.
+              <br /><br />
+              Currently, I drive technical strategy for an EdTech platform serving over 200,000 users. My recent work includes architecting a custom Go (Golang) microservice from the ground up to replace an expensive third-party vendor. By leveraging Go's native streaming and concurrency models, this system securely processes 50,000+ daily CPU-intensive file uploads with near-zero latency.
+              <br /><br />
+              Beyond traditional backend architecture, I specialize in bridging the gap between scalable infrastructure and applied AI. I have designed and deployed RAG architectures and multi-agent systems using the Gemini API that ground LLMs in domain-specific data—resulting in a 70% reduction in AI hallucinations and a 60% drop in manual customer support overhead.
+              <br /><br />
+              Whether I am provisioning distributed AWS infrastructure for an award-winning startup or optimizing zero-latency industrial management interfaces for manufacturing floors, my engineering philosophy remains the same: write efficient, maintainable code that drives quantifiable business value.
+          </p>
+        </div>
+      </div>
+     
       <a href="#skills ">
         <FontAwesomeIcon
           icon={faArrowDown}

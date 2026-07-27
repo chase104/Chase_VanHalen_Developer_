@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import "./css/styles.css";
-import "./css/bootstrap.css";
-import "./css/font-awesome.css";
+import "./scss/styles.scss";
+import "./scss/bootstrap.scss";
+import "./scss/font-awesome.scss";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>

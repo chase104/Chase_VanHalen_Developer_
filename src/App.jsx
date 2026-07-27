@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import About from "./components/About";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
@@ -7,8 +7,15 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { trackVisit } from "./services/visitNotifier";
+
 function App() {
   const [partyMode, setPartyMode] = useState(false);
+
+  useEffect(() => {
+    trackVisit();
+  }, []);
+
   const handleConfettiExplosion = (event) => {
     // Delay the execution to 2 seconds after the click
     const { clientX: x, clientY: y } = event;
