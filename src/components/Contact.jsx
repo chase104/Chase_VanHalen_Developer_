@@ -18,21 +18,38 @@ const Contact = () => {
     setErrorMessage("");
 
     try {
-      const response = await fetch("/api/contact", {
+      // 1. Submit form directly to Formspree
+      const response = await fetch("https://formspree.io/f/meqyropg", {
         method: "POST",
         headers: {
+          "Accept": "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, message }),
+        body: JSON.stringify({
+          email,
+          message,
+          _subject: `📬 Portfolio Contact Form Message from ${email}`,
+        }),
       });
 
       if (response.ok) {
         setStatus("success");
         setEmail("");
         setMessage("");
+
+        // 2. Also notify backend API server if running
+        fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, message }),
+        }).catch(() => {});
       } else {
         const data = await response.json().catch(() => ({}));
-        setErrorMessage(data.error || "Something went wrong sending your message. Please try again.");
+        setErrorMessage(
+          data.error || "Something went wrong sending your message via Formspree. Please try again."
+        );
         setStatus("error");
       }
     } catch (err) {
@@ -58,7 +75,7 @@ const Contact = () => {
         >
           {status === "success" && (
             <div className="alert alert-success w-100 text-start mb-3" role="alert">
-              <strong>Success!</strong> Your message has been sent to Chase's inbox. Thank you!
+              <strong>Success!</strong> Your message has been sent to Formspree & Chase's inbox. Thank you!
             </div>
           )}
 
@@ -109,7 +126,11 @@ const Contact = () => {
           >
             {status === "sending" ? (
               <>
-                <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
                 Sending...
               </>
             ) : (

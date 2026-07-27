@@ -8,6 +8,7 @@ import {
   faTasks,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
+
 const About = () => {
   const [numbers, setNumbers] = useState([
     {
@@ -52,8 +53,8 @@ const About = () => {
         if (entry.isIntersecting) {
           setNumbers((prevNumbers) =>
             prevNumbers.map((item) => {
-              const duration = 2000; // Animation duration in milliseconds
-              const increment = (item.end / duration) * 10; // Calculate increment to ensure all counters finish at the same time
+              const duration = 2000;
+              const increment = (item.end / duration) * 10;
 
               const animateNumber = (currentValue, endValue) => {
                 if (currentValue < endValue) {
@@ -62,9 +63,7 @@ const About = () => {
                       num.title === item.title
                         ? {
                             ...num,
-                            // Store the numeric value for calculations and comparisons
                             value: Math.min(currentValue + increment, endValue),
-                            // Use a separate property for the formatted string or format during rendering
                             formattedValue: Math.floor(
                               Math.min(currentValue + increment, endValue)
                             ).toLocaleString(),
@@ -83,7 +82,6 @@ const About = () => {
               return item;
             })
           );
-          // Disconnect observer after triggering animation
           observer.disconnect();
         }
       },
@@ -101,32 +99,32 @@ const About = () => {
     <section
       ref={aboutRef}
       id="about"
-      className="about bg-light pt-6 position-relative"
+      className="about bg-light pt-6 pb-7 position-relative"
     >
       <div className="container">
         <div className="text-center">
           <h4 className="text-uppercase fw-bold text-primary">About Me</h4>
-           <div className="row stats py-5">
-        {numbers.map((num, index) => (
-          <div
-            key={index}
-            className="stat-block text-center col-md-3 col-sm-10"
-          >
-            <div className="d-flex gap-2 mb-1 align-items-center justify-content-center">
-              <FontAwesomeIcon
-                icon={num.icon}
-                size="2x"
-                className="fa-primary-color"
-              />
-              <h2 className="counter mb-0 xl-text">
-                {num.formattedValue}
-                {num.hasPlus ? "+" : ""}
-              </h2>
-            </div>
-            <p>{num.title}</p>
+          <div className="row stats py-5">
+            {numbers.map((num, index) => (
+              <div
+                key={index}
+                className="stat-block text-center col-md-3 col-sm-10"
+              >
+                <div className="d-flex gap-2 mb-1 align-items-center justify-content-center">
+                  <FontAwesomeIcon
+                    icon={num.icon}
+                    size="2x"
+                    className="fa-primary-color"
+                  />
+                  <h2 className="counter mb-0 xl-text">
+                    {num.formattedValue}
+                    {num.hasPlus ? "+" : ""}
+                  </h2>
+                </div>
+                <p>{num.title}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
           <hr className="w-25 mx-auto" />
           <h2 className="mb-4">My Background</h2>
         </div>
@@ -137,22 +135,22 @@ const About = () => {
             className="about-img img-fluid rounded-circle col-9 mb-4 mb-md-0 col-sm-6 col-md-4 col-lg-4 mx-auto"
           />
           <p className="lead fw-normal col-12 col-md-8 col-lg-8 fs-5">
-              I am a Senior Full-Stack Engineer and Systems Architect specializing in highly concurrent backend systems and production-grade AI integrations. With a focus on scale and resilience, I build architectures that solve complex business problems, from engineering high-throughput microservices to deploying agentic AI workflows.
-              <br /><br />
-              Currently, I drive technical strategy for an EdTech platform serving over 200,000 users. My recent work includes architecting a custom Go (Golang) microservice from the ground up to replace an expensive third-party vendor. By leveraging Go's native streaming and concurrency models, this system securely processes 50,000+ daily CPU-intensive file uploads with near-zero latency.
-              <br /><br />
-              Beyond traditional backend architecture, I specialize in bridging the gap between scalable infrastructure and applied AI. I have designed and deployed RAG architectures and multi-agent systems using the Gemini API that ground LLMs in domain-specific data—resulting in a 70% reduction in AI hallucinations and a 60% drop in manual customer support overhead.
-              <br /><br />
-              Whether I am provisioning distributed AWS infrastructure for an award-winning startup or optimizing zero-latency industrial management interfaces for manufacturing floors, my engineering philosophy remains the same: write efficient, maintainable code that drives quantifiable business value.
+            I am a Senior Full-Stack Engineer and Systems Architect specializing in highly concurrent backend systems and production-grade AI integrations. With a focus on scale and resilience, I build architectures that solve complex business problems, from engineering high-throughput microservices to deploying agentic AI workflows.
+            <br /><br />
+            Currently, I drive technical strategy for an EdTech platform serving over 200,000 users. My recent work includes architecting a custom Go (Golang) microservice from the ground up to replace an expensive third-party vendor. By leveraging Go's native streaming and concurrency models, this system securely processes 50,000+ daily CPU-intensive file uploads with near-zero latency.
+            <br /><br />
+            Beyond traditional backend architecture, I specialize in bridging the gap between scalable infrastructure and applied AI. I have designed and deployed RAG architectures and multi-agent systems using the Gemini API that ground LLMs in domain-specific data—resulting in a 70% reduction in AI hallucinations and a 60% drop in manual customer support overhead.
+            <br /><br />
+            Whether I am provisioning distributed AWS infrastructure for an award-winning startup or optimizing zero-latency industrial management interfaces for manufacturing floors, my engineering philosophy remains the same: write efficient, maintainable code that drives quantifiable business value.
           </p>
         </div>
       </div>
      
-      <a href="#skills ">
+      <a href="#skills">
         <FontAwesomeIcon
           icon={faArrowDown}
           size="3x"
-          className=" down-arrow-custom "
+          className="down-arrow-custom"
           color="black"
         />
       </a>

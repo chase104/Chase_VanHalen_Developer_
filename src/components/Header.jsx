@@ -66,8 +66,8 @@ const Header = ({ handleConfettiExplosion }) => {
   };
 
   return (
-    <header className="header  py-5 vh-100 text-center position-relative">
-      <div className="text-container position-relative d-flex flex-column justify-content-center align-items-center h-100">
+    <header className="header py-5 min-vh-100 text-center position-relative d-flex align-items-center justify-content-center">
+      <div className="text-container position-relative d-flex flex-column justify-content-center align-items-center w-100 my-auto py-5">
         <h5 className="text-primary fs-3 fw-bold text-uppercase">Hi there!</h5>
         <h1 id="typing-text" className="display-1 fw-bold text-white">
           {text}

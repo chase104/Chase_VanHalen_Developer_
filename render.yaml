@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: vanhalen-portfolio
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: MAILJET_API_KEY
+        value: 467b6964abdd7cbd9e956576e7190377
+      - key: MAILJET_SECRET_KEY
+        value: 0a4af3c90b6a9ec1292f401033f7ad7e
+      - key: NOTIFICATION_EMAIL
+        value: chase.vanhalen88@gmail.com
+      - key: SENDER_EMAIL
+        value: noreply@playpod.education
