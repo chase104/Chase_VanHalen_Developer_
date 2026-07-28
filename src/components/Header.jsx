@@ -119,13 +119,14 @@ const Header = ({ handleConfettiExplosion }) => {
       <div className="text-container position-relative d-flex flex-column justify-content-center align-items-center w-100 my-auto py-5">
         <div className="header-title-group text-center">
           <h5 className="text-primary fs-3 fw-bold text-uppercase">Hi there!</h5>
-          <h1 id="typing-text" className="display-1 fw-bold text-white">
+          <h1 id="typing-text" className="display-1 fw-bold text-white mb-3">
             {text}<span className="blinking-cursor" aria-hidden="true" />
           </h1>
 
-          <p className="roles text-white text-uppercase fs-4 mb-2">
-            <span>Senior Software Engineer | Edtech Specialist</span>
-          </p>
+          <div className="roles text-white text-uppercase fs-4 mb-2 d-flex flex-column align-items-center gap-1">
+            <span>Senior Software Engineer</span>
+            <span className="opacity-75">Edtech Specialist</span>
+          </div>
         </div>
 
         <div className={`header-reveal-section d-flex flex-column align-items-center w-100 ${isTypingDone ? "is-visible" : ""}`}>
