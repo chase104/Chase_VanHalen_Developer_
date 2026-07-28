@@ -132,7 +132,7 @@ const About = () => {
     >
       <div className="container">
         <div className="text-center">
-          <h4 className="text-uppercase fw-bold text-primary">About Me</h4>
+          <h4 className="text-uppercase fw-bold text-primary">About</h4>
           <div className="row stats py-5">
             {numbers.map((num, index) => (
               <div
@@ -201,8 +201,7 @@ const About = () => {
               </div>
             ))}
           </div>
-          <hr className="w-25 mx-auto" />
-          <h2 className="mb-4">My Background</h2>
+
         </div>
         <div className="about-content text-start clearfix">
           <img
