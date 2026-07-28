@@ -124,7 +124,7 @@ const Header = ({ handleConfettiExplosion }) => {
           </h1>
 
           <p className="roles text-white text-uppercase fs-4 mb-2">
-            <span>Senior Software Engineer</span>
+            <span>Senior Software Engineer | Edtech Specialist</span>
           </p>
         </div>
 
