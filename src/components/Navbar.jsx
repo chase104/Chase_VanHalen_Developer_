@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import Logo from "../images/logo.png";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faAws, faNodeJs, faReact } from "@fortawesome/free-brands-svg-icons";
-// import { faDatabase } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const [navbarClasses, setNavbarClasses] = useState("");
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,58 +21,62 @@ const Navbar = () => {
     // Cleanup function to remove the event listener
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const toggleNav = () => {
+    setIsNavOpen((prev) => !prev);
+  };
+
+  const closeNav = () => {
+    setIsNavOpen(false);
+  };
+
   return (
     <nav
-      className={`navbar navbar-expand-lg fixed-top  navbar-light ${navbarClasses}`}
+      className={`navbar navbar-expand-lg fixed-top navbar-dark ${navbarClasses}`}
     >
       <div className="container">
-        <a className="navbar-brand d-flex gap-3" href="#">
+        <a className="navbar-brand d-flex gap-3 align-items-center" href="#" onClick={closeNav}>
           <img src={Logo} alt="logo" />
           <span>Chase Van Halen</span>
-          {/* <span className="fw-bold fs-4">CV</span> */}
-          {/* <FontAwesomeIcon icon={faReact} size="2x" color="primary" />
-
-          <FontAwesomeIcon icon={faNodeJs} size="2x" color="primary" />
-
-          <FontAwesomeIcon icon={faAws} size="2x" color="primary" />
-
-          <FontAwesomeIcon icon={faDatabase} size="2x" color="primary" /> */}
         </a>
         <button
-          className="navbar-toggler"
+          className="navbar-toggler custom-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDropdown"
+          onClick={toggleNav}
           aria-controls="navbarNavDropdown"
-          aria-expanded="false"
+          aria-expanded={isNavOpen}
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul className="navbar-nav ms-auto text-white">
+        <div
+          className={`collapse navbar-collapse ${isNavOpen ? "show" : ""}`}
+          id="navbarNavDropdown"
+        >
+          <ul className="navbar-nav ms-auto text-white align-items-lg-center gap-2 gap-lg-3">
             <li className="nav-item">
-              <a className="nav-link" aria-current="page" href="#">
+              <a className="nav-link" aria-current="page" href="#" onClick={closeNav}>
                 Home
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#about">
+              <a className="nav-link" href="#about" onClick={closeNav}>
                 About
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#skills">
+              <a className="nav-link" href="#skills" onClick={closeNav}>
                 Skills
               </a>
             </li>
 
             <li className="nav-item">
               <a
-                className="nav-link btn btn-outline-primary px-4 mx-4"
+                className="nav-link btn btn-primary px-4 py-2 mt-2 mt-lg-0 text-white nav-cta-btn"
                 href="#contact"
+                onClick={closeNav}
               >
-                Contact Me
+                Contact
               </a>
             </li>
           </ul>
@@ -85,3 +87,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

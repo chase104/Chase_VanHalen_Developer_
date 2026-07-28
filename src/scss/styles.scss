@@ -7,6 +7,46 @@
     url("../images/header-background.jpg") center center no-repeat;
   background-size: cover;
 }
+
+.header-title-group {
+  position: relative;
+  z-index: 10;
+}
+
+.header-reveal-section {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(-90px);
+  pointer-events: none;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+.blinking-cursor {
+  display: inline-block;
+  width: 4px;
+  height: 0.85em;
+  background-color: #4395d1;
+  margin-left: 1px;
+  vertical-align: -0.05em;
+  border-radius: 2px;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
 .navbar-brand img {
   max-height: 30px;
 }
@@ -16,15 +56,167 @@
 .navbar a {
   color: #fff !important;
 }
+
+/* Custom Navbar Toggler & Mobile Menu Styling */
+.custom-toggler {
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  background-color: rgba(25, 30, 71, 0.85) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  &:hover, &:focus {
+    border-color: #4395d1 !important;
+    background-color: rgba(67, 149, 209, 0.2) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    outline: none;
+  }
+
+  .navbar-toggler-icon {
+    width: 1.5em;
+    height: 1.5em;
+    filter: brightness(0) invert(1) !important;
+  }
+}
+
+/* Custom Navbar CTA Button Styling */
+.nav-cta-btn {
+  background-color: #4395d1 !important;
+  border: 1px solid #4395d1 !important;
+  color: #ffffff !important;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+
+  &:hover, &:focus {
+    background-color: #3281be !important;
+    border-color: #3281be !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+}
+
+/* Hero Primary CTA Button ("See My Impact") */
+.hero-primary-cta {
+  background-color: #4395d1 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 10px;
+  padding: 14px 32px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .chevron-icon {
+    transition: transform 0.3s ease;
+    color: #ffffff;
+  }
+
+  &:hover {
+    background-color: #3182be !important;
+    color: #ffffff !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+
+    .chevron-icon {
+      transform: translateY(3px);
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background: #191e47;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+
+    .navbar-nav {
+      align-items: flex-start !important;
+      text-align: left !important;
+      padding-left: 0 !important;
+      width: 100%;
+    }
+
+    .nav-item {
+      width: 100%;
+      text-align: left !important;
+      margin: 0 !important;
+    }
+
+    .nav-link {
+      display: block !important;
+      width: 100% !important;
+      padding: 10px 16px !important;
+      border-radius: 8px;
+      font-weight: 500;
+      text-align: left !important;
+      transition: all 0.25s ease;
+      margin: 2px 0 !important;
+
+      &:hover {
+        background-color: rgba(67, 149, 209, 0.25) !important;
+        color: #4395d1 !important;
+      }
+    }
+
+    .btn-outline-primary,
+    .nav-cta-btn {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      margin-top: 10px !important;
+      text-align: center !important;
+      display: block !important;
+      width: 100% !important;
+
+      &:hover {
+        background-color: #3281be !important;
+        color: #ffffff !important;
+      }
+    }
+  }
+}
+
+
+
+.about-content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
 .about-img {
-  width: 280px;
-  height: 280px;
+  width: 260px;
+  height: 260px;
   max-width: 100%;
   object-fit: cover;
-}
-.chevron:hover {
-  &svg {
-    color: black;
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(25, 30, 71, 0.12);
+
+  @media (min-width: 768px) {
+    float: left;
+    margin-right: 2rem;
+    margin-bottom: 1.25rem;
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 767.98px) {
+    float: none;
+    display: block;
+    margin: 0 auto 1.5rem auto;
+    width: 200px;
+    height: 200px;
   }
 }
 .down-arrow-custom {
@@ -144,20 +336,20 @@ div.row.stats {
 }
 
 /* ==========================================================================
-   Chase's Skills & Interactive Skills Game Styling (POPPING DESIGN)
+   Chase's Skills & Interactive Skills Game Styling
    ========================================================================== */
 .skills-game-container {
-  border-radius: 20px;
-  padding: 28px;
-  background: linear-gradient(135deg, rgba(249, 250, 254, 0.95) 0%, rgba(240, 244, 255, 0.95) 100%);
-  border: 2.5px dashed rgba(67, 149, 209, 0.4);
-  box-shadow: 0 10px 30px rgba(25, 30, 71, 0.05), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(25, 30, 71, 0.05);
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 
   &.is-dragging-over {
-    background: linear-gradient(135deg, rgba(230, 242, 255, 0.95) 0%, rgba(215, 235, 255, 0.95) 100%);
+    background: #f4f9fd;
     border-color: #4395d1;
-    box-shadow: 0 0 25px rgba(67, 149, 209, 0.3);
+    box-shadow: 0 0 15px rgba(67, 149, 209, 0.15);
   }
 }
 
@@ -168,79 +360,79 @@ div.row.stats {
 }
 
 .skill-count-badge {
-  background: linear-gradient(135deg, #4395d1 0%, #2b74ab 100%);
-  color: white;
+  background: rgba(67, 149, 209, 0.12);
+  color: #4395d1;
   font-size: 0.85rem;
   padding: 5px 14px;
   border-radius: 30px;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(67, 149, 209, 0.35);
   letter-spacing: 0.3px;
 }
 
 .skills-category-box {
-  border-radius: 18px;
-  padding: 22px;
-  padding-bottom: 36px;
+  border-radius: 16px;
+  padding: 20px;
+  padding-bottom: 32px;
   background: #ffffff;
-  border: 1.5px solid rgba(67, 149, 209, 0.15);
-  box-shadow: 0 8px 24px rgba(25, 30, 71, 0.05);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(25, 30, 71, 0.04);
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   min-height: 220px;
 
   &.is-dragging-over {
-    background: #f0f7ff;
+    background: #f4f9fd;
     border-color: #4395d1;
-    box-shadow: 0 0 20px rgba(67, 149, 209, 0.25);
+    box-shadow: 0 0 15px rgba(67, 149, 209, 0.15);
   }
 }
 
 .skill-badge-item {
   user-select: none;
-  padding: 10px 16px;
-  border-radius: 14px;
-  min-height: 48px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  min-height: 44px;
   display: flex !important;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   letter-spacing: 0.2px;
-  color: #ffffff;
-  background: linear-gradient(135deg, #191e47 0%, #2b336b 100%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 6px 14px rgba(25, 30, 71, 0.15), 0 2px 4px rgba(0, 0, 0, 0.08);
-  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  color: #191e47;
+  background: #f8fafe;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 6px rgba(25, 30, 71, 0.04);
+  transition: all 0.25s ease;
   cursor: grab;
   margin-bottom: 8px;
 
   &:hover:not(.is-dragging) {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(67, 149, 209, 0.4), 0 4px 8px rgba(0, 0, 0, 0.12);
-    background: linear-gradient(135deg, #4395d1 0%, #2570a8 100%);
-    border-color: rgba(255, 255, 255, 0.4);
-    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(67, 149, 209, 0.18);
+    background: #ffffff;
+    border-color: #4395d1;
+    color: #4395d1;
   }
 
   &.is-dragging {
     cursor: grabbing;
-    background: linear-gradient(135deg, #cc2973 0%, #a31959 100%);
-    box-shadow: 0 16px 36px rgba(204, 41, 115, 0.45), 0 6px 12px rgba(0, 0, 0, 0.2);
-    border-color: #ff7bb0;
+    background: #ffffff;
+    border-color: #4395d1;
+    color: #4395d1;
+    box-shadow: 0 10px 25px rgba(67, 149, 209, 0.25);
     z-index: 9999;
   }
 }
 
 .skill-icon-wrapper {
   background: #ffffff;
-  border-radius: 9px;
-  padding: 4px 6px;
+  border-radius: 8px;
+  padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-  width: 38px;
-  height: 32px;
+  border: 1px solid #e9ecef;
+  width: 34px;
+  height: 30px;
   flex-shrink: 0;
 
   img {
@@ -382,16 +574,16 @@ div.row.stats {
 }
 
 .skill-tidbit-banner {
-  background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
-  border: 1.5px solid #7dd3fc;
-  color: #0369a1;
+  background: #f0f7fc;
+  border: 1px solid #d0e3f4;
+  color: #191e47;
   max-width: 620px;
 }
 
 .skill-experience-banner {
-  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-  border: 1.5px solid #86efac;
-  color: #166534;
+  background: #f8fafe;
+  border: 1px solid #e2e8f0;
+  color: #191e47;
   max-width: 620px;
 }
 
